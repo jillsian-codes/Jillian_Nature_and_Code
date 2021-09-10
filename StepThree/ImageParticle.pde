@@ -11,8 +11,8 @@ class ImageParticle {
   ImageParticle(PImage img) {
     this.img = img;
   }
-
-  void create() {
+  
+  void create(){
     noStroke();
     textureMode(NORMAL);
     beginShape();
