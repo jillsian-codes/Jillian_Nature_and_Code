@@ -1,14 +1,40 @@
-class Bot{
-    constructor(speed, size, color, pos) {//only one allowed
-        //each bot needs to have a speed, a size, a color, and a starting position
-        this.speed = speed; //single value, randomized
-        this.size = size; //single value
-        this.color = color; //single value, randomized
-        this.pos = pos; //a vector, originally the starting point
+class Bot {
+    constructor(r, col, pos, spd) {
+        this.r = r; // radius
+        this.col = col;
+        this.pos = pos;
+        this.spd = spd;
     }
 
-    draw(){
-
+    move() {
+        this.pos.add(this.spd);
     }
 
+    draw() {
+        push();
+        translate(this.pos.x, this.pos.y);
+        fill(this.col);
+        ellipse(0, 0, this.r * 2, this.r * 2);
+        pop();
+    }
+
+    checkBoundsCollision(bounds) {
+        if (this.pos.x > bounds.x / 2 - this.r) {
+            this.pos.x = bounds.x / 2 - this.r;
+            this.spd.x *= -1;
+        }
+        else if (this.pos.x < -bounds.x / 2 + this.r) {
+            this.pos.x = -bounds.x / 2 + this.r;
+            this.spd.x *= -1;
+        }
+
+        if (this.pos.y > bounds.y / 2 - this.r) {
+            this.pos.y = bounds.y / 2 - this.r;
+            this.spd.y *= -1;
+        }
+        else if (this.pos.y < -bounds.y / 2 + this.r) {
+            this.pos.y = -bounds.y / 2 + this.r;
+            this.spd.y *= -1;
+        }
+    }
 }
