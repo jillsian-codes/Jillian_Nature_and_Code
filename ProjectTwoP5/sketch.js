@@ -4,32 +4,28 @@
 // September 13, 2021
 
 // Description:
-// P5_Springing03_Segments
-// OOP version with segments of 
-// springing using a follow the 
+// P5_Springing02_OOP
+// OOP version of springing
+// using a follow the 
 // leader approach with
 // controllable easing.
 
 let bounds; // vector
 let leader; //Vector
-let followers = []; //Vector
-let segmentCount = 70;
-let dude; // SpringyDude
+let follower; //Vector
+let dude; // Springer
 
 function setup() {
     createCanvas(600, 600);
     bounds = createVector(400, 400);
 
-    leader = new Bot(5, color(15, 180, 255, 100), createVector(0, 0),
+    leader = new Bot(15, color(200, 100, 0), createVector(0, 0),
         createVector(random(-1.5, 1.5), random(-1.5, 1.5)));
 
-    let segmentReducer = 4.9 / segmentCount; // create wormlike body
-    for (let i = 0; i < segmentCount; i++) {
-        followers[i] = new Bot(5 - segmentReducer * i, color(15, 170, 255, 50), createVector(0, 0),
-            createVector(0, 0));
-    }
+    follower = new Bot(8, color(15, 170, 255), createVector(0, 0),
+        createVector(0, 0));
 
-    dude = new SpringyDude(leader, followers, .16, .5, .099);
+    dude = new Springer(leader, follower, .003, .9, .75);
 }
 
 function draw() {
