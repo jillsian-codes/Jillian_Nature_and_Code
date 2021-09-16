@@ -1,40 +1,25 @@
-class Bot {
-    constructor(r, col, pos, spd) {
-        this.r = r; // radius
-        this.col = col;
-        this.pos = pos;
-        this.spd = spd;
+class Bot{
+    constructor(diameter, color, jitter, speed){
+        this.x = width / 2; //starts in the middle
+        this.y = height / 2;
+        this.diameter = diameter;
+        this.color = color;
+        this.jitter = jitter; //only bee jitters
+        this.speed = speed; //a vector, is random for the flower
     }
 
-    move() {
-        this.pos.add(this.spd);
+    move(){
+        //make the bees jitter
+        this.x += random(-this.jitter, this.jitter);
+        this.y += random(-this.jitter, this.jitter);
+
+        //this.x += this.speed;
+        //this.x += this.speed;
     }
 
-    draw() {
-        push();
-        translate(this.pos.x, this.pos.y);
-        fill(this.col);
-        ellipse(0, 0, this.r * 2, this.r * 2);
-        pop();
-    }
-
-    checkBoundsCollision(bounds) {
-        if (this.pos.x > bounds.x / 2 - this.r) {
-            this.pos.x = bounds.x / 2 - this.r;
-            this.spd.x *= -1;
-        }
-        else if (this.pos.x < -bounds.x / 2 + this.r) {
-            this.pos.x = -bounds.x / 2 + this.r;
-            this.spd.x *= -1;
-        }
-
-        if (this.pos.y > bounds.y / 2 - this.r) {
-            this.pos.y = bounds.y / 2 - this.r;
-            this.spd.y *= -1;
-        }
-        else if (this.pos.y < -bounds.y / 2 + this.r) {
-            this.pos.y = -bounds.y / 2 + this.r;
-            this.spd.y *= -1;
-        }
+    display(){
+        fill(this.color);
+        noStroke();
+        ellipse(this.x, this.y, this.diameter, this.diameter);
     }
 }

@@ -1,44 +1,17 @@
-// Ira Greenberg
-// Nature & Code
-// Center of Creative Computation | SMU
-// September 13, 2021
-
-// Description:
-// P5_Springing02_OOP
-// OOP version of springing
-// using a follow the 
-// leader approach with
-// controllable easing.
-
-let bounds; // vector
-let leader; //Vector
-let follower; //Vector
-let dude; // Springer
+let flower;
+let bee;
 
 function setup() {
-    createCanvas(600, 600);
-    bounds = createVector(400, 400);
-
-    leader = new Bot(15, color(200, 100, 0), createVector(0, 0),
-        createVector(random(-1.5, 1.5), random(-1.5, 1.5)));
-
-    follower = new Bot(8, color(15, 170, 255), createVector(0, 0),
-        createVector(0, 0));
-
-    dude = new Springer(leader, follower, .003, .9, .75);
+  createCanvas(600, 600);
+  flower = new Bot(random (30, 40), color(199, 21, 133), 0, createVector(0, 0));
+  //if i have time, make the flower look like this: https://p5js.org/examples/hello-p5-simple-shapes.html
+  bee = new Bot(random (10, 20), color(255, 204, 0), 3, createVector(0, 0));
 }
 
 function draw() {
-    background(255);
-    translate(width / 2, height / 2);
-    drawBounds();
-
-    dude.slither();
-    dude.checkBoundsCollision(bounds);
-}
-
-function drawBounds() {
-    noFill();
-    stroke(0);
-    rect(-bounds.x / 2, -bounds.y / 2, bounds.x, bounds.y);
+  background(20);
+  bee.move();
+  flower.move();
+  bee.display();
+  flower.display();
 }
