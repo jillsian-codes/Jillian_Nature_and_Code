@@ -6,15 +6,14 @@ class Bot{
         this.color = color;
         this.jitter = jitter; //only bee jitters
         this.speed = speed; //a vector, is random for the flower
+        this.position = createVector(0, 0);
     }
 
     move(){
         //make the bees jitter
-        this.x += random(-this.jitter, this.jitter);
-        this.y += random(-this.jitter, this.jitter);
-
-        //this.x += this.speed;
-        //this.x += this.speed;
+        //this.position += (this.jitter, this.jitter);
+        //add the actual movement
+        //this.position += this.speed;
     }
 
     display(){
