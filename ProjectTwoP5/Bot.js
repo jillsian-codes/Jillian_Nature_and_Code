@@ -1,12 +1,12 @@
 class Bot{
-    constructor(diameter, color, jitter, speed){
+    constructor(diameter, color, jitter, speed, position){
         this.x = width / 2; //starts in the middle
         this.y = height / 2;
         this.diameter = diameter;
         this.color = color;
         this.jitter = jitter; //only bee jitters
         this.speed = speed; //a vector, is random for the flower
-        this.position = createVector(0, 0);
+        this.position = position; //starting position
     }
 
     move(){
@@ -23,6 +23,10 @@ class Bot{
         fill(this.color);
         noStroke();
         ellipse(this.position.x, this.position.y, this.diameter, this.diameter);
+    }
+
+    displayImage(flowerImage){
+        image(flowerImage, this.position.x, this.position.y, 50, 50);
     }
 
     checkBounds(bounds){
