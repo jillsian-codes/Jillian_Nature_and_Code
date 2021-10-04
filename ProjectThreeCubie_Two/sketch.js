@@ -8,6 +8,9 @@
 // Creating a Verlet organism
 // based on a Verlet Cube
 
+// to fix my performance issue, make it so it's a parallel array
+// rather than a bunch of separate objects, like we did for the other program
+
 let bounds; // vector-+++++++++++
 let verletBoxes = []; // array of boxes
 let numBoxes;
