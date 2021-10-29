@@ -1,55 +1,50 @@
-// Jillian Taylor
-// Code Source: Ira Greenberg
-// Nature & Code
-// Center of Creative Computation | SMU
-// Fall, 2021
+//Jillian Taylor
+//Code reference: Ira Greenberg
+//Nature & Code
+//Center of Creative Computation | SMU
+//Fall, 2021
 
-// Description:
-// Creating a Verlet organism
-// based on a Verlet Cube
+//Description:
+//Creating a verlet grid
+//Animating it to move with the volume of music/audio input
 
-// to fix my performance issue, make it so it's a parallel array
-// rather than a bunch of separate objects, like we did for the other program
+let bounds;
+let verletGraph;
+let mic;
 
-let bounds; // vector-+++++++++++
-let verletBoxes = []; // array of boxes
-let numBoxes;
+//todo: change colors using color picker
 
 function setup() {
+    //MAKE BACKGROUND
     createCanvas(600, 600, WEBGL);
     bounds = createVector(300, 300, 300);
-    numBoxes = 5;
 
-    for(let i = 0; i < numBoxes; i++){
-        verletBoxes[i] = new VerletBox(createVector(0, 0, 0), random(10, 20), .001, color(85, 134, 140));
-        verletBoxes[i].nudge(1, createVector(random(-10.01, 10.01), random(-25.02, 25.02), random(-30.03, 30.03)));
-        verletBoxes[i].setStyles(random(5, 10), color(200, 171, 131), color(238, 197, 132));
-    }
+    //MAKE GRAPH
+    verletGraph = new VerletGraph(10, bounds); //parameter is size
+
+    //MAKE MICS
+    mic = new p5.AudioIn();
+    mic.start();
 }
 
 function draw() {
-    background(141, 181, 185);
-
-    ambientLight(255); //makes cube visible
-    directionalLight(255, 0, 0, 0.25, 0.25, 0);
-    pointLight(0, 0, 255, mouseX, mouseY, 250);
-
-    //rotateX(frameCount*PI/720);
-    rotateY(frameCount*PI/100);
-    drawBounds();
+    background(28, 100, 105);
     
-   // specularMaterial(250);
-   for(let i = 0; i < numBoxes; i++){
-        verletBoxes[i].verlet();
-        verletBoxes[i].draw();
-        verletBoxes[i].boundsCollide(bounds);
-   }
+    rotateY(frameCount*PI/720);
+    drawBounds();
+
+    //DRAW GRAPH
+    verletGraph.draw();
+
+    //GET VOLUME
+    var vol = mic.getLevel();
+    verletGraph.jump(vol);
+
+    console.log(vol);
 }
 
-// NOTE: Needs to be a cube 
-function drawBounds() {
+function drawBounds(){
     noFill();
-    stroke(255, 239, 128);
-    strokeWeight(5);
-    box(bounds.x, bounds.y, bounds.z)
+    stroke(200, 228, 210);
+    box(bounds.x, bounds.y, bounds.z);
 }

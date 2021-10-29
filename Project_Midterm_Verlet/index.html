@@ -14,6 +14,7 @@
   
   <!-- Include P5 lib -->
   <script src="../libP5/p5.js"></script>
+  <script src="../libP5/addons/p5.sound.js"></script>
  
   <!-- Hack avoids continuous browser caching with inconsistent .js updates.
   From:https://stackoverflow.com/questions/11467873/how-to-append-timestamp-to-the-javascript-file-in-script-tag-url-to-avoid-cach -->
@@ -41,7 +42,7 @@
       };
 
       // INCLUDE YOUR .JS FILES HERE
-      var scripts = ['VerletNode.js', 'VerletStick.js', 'Face3.js', 'VerletBox.js', 'sketch.js'];
+      var scripts = ['sketch.js', 'VerletGraph.js', 'VerletNode.js'];
 
       // Loop through each script name and append our new version number
       scripts.map(function (script) {
